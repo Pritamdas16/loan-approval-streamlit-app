@@ -42,3 +42,6 @@ All analysis, preprocessing, and model implementations are available in the note
 ```bash
 pip install -r requirements.txt
 
+## 🚀 Live Demo
+🔗 https://loan-approval-ml.streamlit.app
+
