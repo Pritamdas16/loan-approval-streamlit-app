@@ -1,7 +1,6 @@
 import streamlit as st
 import pickle
 import pandas as pd
-import numpy as np
 import os
 
 # ==================== PAGE CONFIG ====================
@@ -17,24 +16,19 @@ st.markdown("""
 .stApp {
     background: radial-gradient(circle at top, #0f172a, #020617);
 }
-
 .block-container {
     max-width: 900px;
 }
-
 h1, h2, h3 {
     color: #e5e7eb;
 }
-
 p {
     color: #9ca3af;
 }
-
 div[data-baseweb="input"], div[data-baseweb="select"] {
     background-color: #020617 !important;
     border-radius: 10px;
 }
-
 .stButton>button {
     background: linear-gradient(90deg, #2563eb, #4f46e5);
     color: white;
@@ -46,14 +40,12 @@ div[data-baseweb="input"], div[data-baseweb="select"] {
 .stButton>button:hover {
     background: linear-gradient(90deg, #1d4ed8, #4338ca);
 }
-
 .result-approve {
     background: linear-gradient(90deg, #064e3b, #022c22);
     padding: 22px;
     border-radius: 18px;
     text-align: center;
 }
-
 .result-reject {
     background: linear-gradient(90deg, #7f1d1d, #450a0a);
     padding: 22px;
@@ -82,11 +74,10 @@ cat_cols = [
 
 # ==================== HEADER ====================
 st.markdown("<h1 style='text-align:center;'>🏦 Loan Approval Prediction System</h1>", unsafe_allow_html=True)
-st.markdown(
-    "<p style='text-align:center;'>AI-powered loan eligibility assessment</p>",
-    unsafe_allow_html=True
-)
+st.markdown("<p style='text-align:center;'>AI-powered loan eligibility assessment</p>", unsafe_allow_html=True)
 st.markdown("---")
+
+st.info("👉 Fill in the details and click **Check Loan Eligibility** to see the result.")
 
 # ==================== APPLICANT DETAILS ====================
 st.subheader("👤 Applicant Details")
@@ -101,31 +92,29 @@ with col1:
 with col2:
     gender = st.selectbox("Gender", ["Male", "Female"])
     marital_status = st.selectbox("Marital Status", ["Single", "Married"])
-    employer_category = st.selectbox(
-        "Employer Category", ["Government", "MNC", "Private", "Unemployed"]
-    )
+    employer_category = st.selectbox("Employer Category", ["Government", "MNC", "Private", "Unemployed"])
 
-# ==================== FINANCIAL INFO ====================
+# ==================== FINANCIAL DETAILS ====================
 st.subheader("💰 Financial Information")
 
 col3, col4 = st.columns(2)
 
 with col3:
-    applicant_income = st.number_input("Applicant Income (₹)", min_value=0.0, value=40000.0)
-    loan_amount = st.number_input("Loan Amount (₹)", min_value=0.0, value=200000.0)
-    credit_score = st.number_input("Credit Score", min_value=300, max_value=900, value=650)
+    applicant_income = st.number_input("Applicant Income (₹)", min_value=0.0)
+    loan_amount = st.number_input("Loan Amount (₹)", min_value=0.0)
+    credit_score = st.number_input("Credit Score", min_value=300, max_value=900)
 
 with col4:
-    age = st.number_input("Age", min_value=18, value=30)
-    dependents = st.number_input("Dependents", min_value=0, value=1)
-    loan_term = st.number_input("Loan Term (months)", min_value=1, value=240)
+    age = st.number_input("Age", min_value=18)
+    dependents = st.number_input("Dependents", min_value=0)
+    loan_term = st.number_input("Loan Term (months)", min_value=1)
 
 # ==================== ADVANCED ====================
 with st.expander("🔧 Advanced Financial Details (Optional)"):
-    coapplicant_income = st.number_input("Co-applicant Income (₹)", min_value=0.0, value=0.0)
-    savings = st.number_input("Savings (₹)", min_value=0.0, value=100000.0)
-    collateral_value = st.number_input("Collateral Value (₹)", min_value=0.0, value=300000.0)
-    existing_loans = st.number_input("Existing Loans", min_value=0, value=0)
+    coapplicant_income = st.number_input("Co-applicant Income (₹)", min_value=0.0)
+    savings = st.number_input("Savings (₹)", min_value=0.0)
+    collateral_value = st.number_input("Collateral Value (₹)", min_value=0.0)
+    existing_loans = st.number_input("Existing Loans", min_value=0)
 
 # ==================== PREDICTION ====================
 st.markdown("---")
